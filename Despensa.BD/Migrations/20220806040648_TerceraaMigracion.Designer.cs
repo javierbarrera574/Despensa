@@ -4,6 +4,7 @@ using Despensa.BD.Datos;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Despensa.BD.Migrations
 {
     [DbContext(typeof(DespensaDbContext))]
-    partial class DespensaDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220806040648_TerceraaMigracion")]
+    partial class TerceraaMigracion
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -53,9 +55,6 @@ namespace Despensa.BD.Migrations
                         .HasColumnType("decimal(14,2)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex(new[] { "ClaveProducto" }, "Producto: Dragon Ball Z")
-                        .IsUnique();
 
                     b.ToTable("Producto_Proveedores");
                 });
@@ -97,9 +96,6 @@ namespace Despensa.BD.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("Producto_ProveedoresId");
-
-                    b.HasIndex(new[] { "DNI" }, "Proveedor: 34902124")
-                        .IsUnique();
 
                     b.ToTable("Proveedores");
                 });

@@ -10,12 +10,15 @@ namespace Despensa.BD.Datos
 {
     public class DespensaDbContext : DbContext
     {
+
+        
+
         public DespensaDbContext(DbContextOptions options) : base(options)
         {
 
-
-
         }
+
+
 
         public DespensaDbContext()
         {

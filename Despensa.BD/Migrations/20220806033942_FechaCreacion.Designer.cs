@@ -4,6 +4,7 @@ using Despensa.BD.Datos;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Despensa.BD.Migrations
 {
     [DbContext(typeof(DespensaDbContext))]
-    partial class DespensaDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220806033942_FechaCreacion")]
+    partial class FechaCreacion
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -31,9 +33,7 @@ namespace Despensa.BD.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("ClaveProducto")
-                        .IsRequired()
-                        .HasMaxLength(12)
-                        .HasColumnType("nvarchar(12)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("DescripcionProducto")
                         .HasColumnType("nvarchar(max)");
@@ -45,7 +45,6 @@ namespace Despensa.BD.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("NombreProducto")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal>("PrecioProducto")
@@ -53,9 +52,6 @@ namespace Despensa.BD.Migrations
                         .HasColumnType("decimal(14,2)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex(new[] { "ClaveProducto" }, "Producto: Dragon Ball Z")
-                        .IsUnique();
 
                     b.ToTable("Producto_Proveedores");
                 });
@@ -73,10 +69,6 @@ namespace Despensa.BD.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("VARCHAR(50)");
 
-                    b.Property<int>("DNI")
-                        .HasMaxLength(8)
-                        .HasColumnType("int");
-
                     b.Property<DateTime>("FechaCreacion")
                         .HasColumnType("datetime2");
 
@@ -88,7 +80,6 @@ namespace Despensa.BD.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("NumeroTelefono")
-                        .HasMaxLength(8)
                         .HasColumnType("int");
 
                     b.Property<int?>("Producto_ProveedoresId")
@@ -97,9 +88,6 @@ namespace Despensa.BD.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("Producto_ProveedoresId");
-
-                    b.HasIndex(new[] { "DNI" }, "Proveedor: 34902124")
-                        .IsUnique();
 
                     b.ToTable("Proveedores");
                 });
