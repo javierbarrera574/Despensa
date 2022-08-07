@@ -9,17 +9,10 @@ using System.Threading.Tasks;
 
 namespace Despensa.BD.Datos.Entidades
 {
-    [Index(nameof(ClaveProducto),Name = "Producto: Dragon Ball Z", IsUnique =true)]//Nombre del campo unico ClaveProducto
+    [Index(nameof(NombreProducto),Name = "Producto: Dragon Ball Z", IsUnique =true)]//Nombre del campo unico ClaveProducto
 
-    public class Producto_Proveedores
+    public class Productos:EntityBase
     {
-        [Key]
-
-        [Required]
-
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-
-        public int Id { get; set; }
 
         [Required]
 
@@ -39,24 +32,25 @@ namespace Despensa.BD.Datos.Entidades
         [Precision(14, 2)]
         public decimal PrecioProducto { get; set; }
 
-        public void VencimimentoProducto(DateTime FechaCaducidad)
+        public bool VencimimentoProducto(DateTime FechaCaducidad, int id)
         {
+            Productos productos = new Productos();
+
+            bool CambiarProducto = false;
 
             if (FechaVencimientoProducto.Equals(FechaCaducidad))
             {
-
                 Console.WriteLine("El producto esta vencido");
 
+                if (productos.Id.Equals(id))
+                {
+                    CambiarProducto = true;
+                }
             }
-
+            return CambiarProducto;
         }
 
-
-        [ForeignKey("IdProveedores")]
-        public int IdProveedores { get; set; }
-
-        public HashSet<Proveedores> proveedores { get; set; }
-
+        public HashSet<Categoria> categorias { get; set; }
 
     }
 }

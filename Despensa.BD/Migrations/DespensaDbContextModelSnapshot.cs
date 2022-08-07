@@ -22,7 +22,42 @@ namespace Despensa.BD.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
-            modelBuilder.Entity("Despensa.BD.Datos.Entidades.Producto_Proveedores", b =>
+            modelBuilder.Entity("Despensa.BD.Datos.Entidades.Categoria", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("ClasificacionCategoria")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("FechaCreacion")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("ProductoId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ProveedorId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("productosId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("proveedoresId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("productosId");
+
+                    b.HasIndex("proveedoresId");
+
+                    b.ToTable("Categoria");
+                });
+
+            modelBuilder.Entity("Despensa.BD.Datos.Entidades.Productos", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -38,11 +73,11 @@ namespace Despensa.BD.Migrations
                     b.Property<string>("DescripcionProducto")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime?>("FechaVencimientoProducto")
+                    b.Property<DateTime>("FechaCreacion")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("IdProveedores")
-                        .HasColumnType("int");
+                    b.Property<DateTime?>("FechaVencimientoProducto")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("NombreProducto")
                         .IsRequired()
@@ -53,9 +88,6 @@ namespace Despensa.BD.Migrations
                         .HasColumnType("decimal(14,2)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex(new[] { "ClaveProducto" }, "Producto: Dragon Ball Z")
-                        .IsUnique();
 
                     b.ToTable("Producto_Proveedores");
                 });
@@ -71,7 +103,7 @@ namespace Despensa.BD.Migrations
                     b.Property<string>("CorreoElectronico")
                         .IsRequired()
                         .HasMaxLength(50)
-                        .HasColumnType("VARCHAR(50)");
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<int>("DNI")
                         .HasMaxLength(8)
@@ -91,29 +123,34 @@ namespace Despensa.BD.Migrations
                         .HasMaxLength(8)
                         .HasColumnType("int");
 
-                    b.Property<int?>("Producto_ProveedoresId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("Producto_ProveedoresId");
-
-                    b.HasIndex(new[] { "DNI" }, "Proveedor: 34902124")
-                        .IsUnique();
 
                     b.ToTable("Proveedores");
                 });
 
-            modelBuilder.Entity("Despensa.BD.Datos.Entidades.Proveedores", b =>
+            modelBuilder.Entity("Despensa.BD.Datos.Entidades.Categoria", b =>
                 {
-                    b.HasOne("Despensa.BD.Datos.Entidades.Producto_Proveedores", null)
-                        .WithMany("proveedores")
-                        .HasForeignKey("Producto_ProveedoresId");
+                    b.HasOne("Despensa.BD.Datos.Entidades.Productos", "productos")
+                        .WithMany("categorias")
+                        .HasForeignKey("productosId");
+
+                    b.HasOne("Despensa.BD.Datos.Entidades.Proveedores", "proveedores")
+                        .WithMany("categorias")
+                        .HasForeignKey("proveedoresId");
+
+                    b.Navigation("productos");
+
+                    b.Navigation("proveedores");
                 });
 
-            modelBuilder.Entity("Despensa.BD.Datos.Entidades.Producto_Proveedores", b =>
+            modelBuilder.Entity("Despensa.BD.Datos.Entidades.Productos", b =>
                 {
-                    b.Navigation("proveedores");
+                    b.Navigation("categorias");
+                });
+
+            modelBuilder.Entity("Despensa.BD.Datos.Entidades.Proveedores", b =>
+                {
+                    b.Navigation("categorias");
                 });
 #pragma warning restore 612, 618
         }

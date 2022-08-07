@@ -23,7 +23,7 @@ namespace Despensa.BD.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Producto_Proveedores", x => x.Id);
+                    table.PrimaryKey("PK_Productos", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -46,7 +46,7 @@ namespace Despensa.BD.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Producto_Proveedores");
+                name: "Productos");
 
             migrationBuilder.DropTable(
                 name: "Proveedores");

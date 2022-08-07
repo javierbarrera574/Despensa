@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Despensa.BD.Datos
 {
-    public class EntityBase
+    public abstract class EntityBase
     {
 
         [Key]

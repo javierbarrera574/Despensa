@@ -28,7 +28,7 @@ namespace Despensa.BD.Datos
 
         public DbSet<Proveedores> Proveedores { get; set; }
 
-        public DbSet<Producto_Proveedores> Producto_Proveedores { get; set; }
+        public DbSet<Productos> Producto_Proveedores { get; set; }
 
 
 

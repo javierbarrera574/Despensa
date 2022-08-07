@@ -4,7 +4,7 @@
 
 namespace Despensa.BD.Migrations
 {
-    public partial class TerceraaMigracion : Migration
+    public partial class SegundaMigracion : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
